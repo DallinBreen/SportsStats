@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { NFL } from './components/NFL';
 
 import './custom.css'
+import { FetchData } from './components/FetchData';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -13,7 +14,9 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
-        <Route path='/NFL' component={NFL} />
+            <Route path='/NFL' component={NFL} />
+            <Route path='/fetch' component={FetchData} />
+
       </Layout>
     );
   }
