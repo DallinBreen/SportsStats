@@ -6,6 +6,8 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SportsStats.Controllers
 {
@@ -21,22 +23,34 @@ namespace SportsStats.Controllers
             _logger = logger;
         }
 
-        public async Task<string> Index()
+        public async Task<List<Teams>> Index()
         {
             try
             {
-                String response = await client.GetStringAsync("https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4391");
-                // Above three lines can be replaced with new helper method below
-                // string responseBody = await client.GetStringAsync(uri);
+                var response = client.GetAsync("https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id=4391").Result;
+                var json = response.Content.ReadAsStringAsync().Result;
+                var jobject = JObject.Parse(json);
 
-                Console.WriteLine(response);
-                return response;
+                var team = jobject["teams"];
+
+                List<Teams> teamList = new List<Teams>();
+
+                for(int i = 0; i < team.Count(); i++)
+                {
+                    Teams teams = new Teams();
+                    teams.teamName = team[i]["strTeam"].ToString();
+                    teams.teamId = team[i]["idTeam"].ToString();
+
+                    teamList.Add(teams);
+                }
+
+                return teamList;
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
-                return e.Message;
+                return new List<Teams>();
             }
         }
 
