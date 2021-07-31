@@ -55,14 +55,10 @@ namespace SportsStats.Controllers
         }
 
         
-        public string Welcome()
-        {
-            return "Welcome to NFL";
-        }
 
-        public string Team(string teamName)
+        public string Team(string teamId)
         {
-            return teamName;
+            return teamId;
         }
     }
 }
