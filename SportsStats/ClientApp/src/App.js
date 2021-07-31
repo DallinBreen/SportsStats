@@ -14,9 +14,7 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' component={Home} />
-            <Route path='/NFL' component={NFL} />
-            <Route path='/fetch' component={FetchData} />
-
+        <Route path='/NFL' component={NFL} />
       </Layout>
     );
   }
