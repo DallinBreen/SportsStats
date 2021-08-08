@@ -23,7 +23,7 @@ namespace SportsStats.Controllers
             _logger = logger;
         }
 
-        public async Task<List<Teams>> Index()
+        public Task<List<Teams>> Index()
         {
             try
             {
@@ -40,17 +40,19 @@ namespace SportsStats.Controllers
                     Teams teams = new Teams();
                     teams.teamName = team[i]["strTeam"].ToString();
                     teams.teamId = team[i]["idTeam"].ToString();
+                    teams.teamImage = team[i]["strTeamBadge"].ToString();
+                    teams.teamDescription = team[i]["strStadiumDescription"].ToString();
 
                     teamList.Add(teams);
                 }
 
-                return teamList;
+                return Task.FromResult(teamList);
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine("\nException Caught!");
                 Console.WriteLine("Message :{0} ", e.Message);
-                return new List<Teams>();
+                return Task.FromResult(new List<Teams>());
             }
         }
 

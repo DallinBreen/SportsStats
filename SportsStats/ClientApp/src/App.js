@@ -5,7 +5,6 @@ import { Home } from './components/Home';
 import { NFL } from './components/NFL';
 
 import './custom.css'
-import { FetchData } from './components/FetchData';
 
 export default class App extends Component {
   static displayName = App.name;

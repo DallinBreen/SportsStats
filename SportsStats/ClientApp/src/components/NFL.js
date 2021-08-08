@@ -1,4 +1,6 @@
 ﻿import React, { Component } from 'react';
+import { TeamCard } from './TeamCard';
+import './NFL.css';
 
 export class NFL extends Component {
     constructor(props) {
@@ -33,7 +35,7 @@ export class NFL extends Component {
     render() {
 
         let teamList = this.state.teams.map((team) => {
-            return <li>{team.teamName}</li>;
+            return <TeamCard key={team.teamId} teamName={team.teamName} teamImage={team.teamImage} teamDescription={team.teamDescription} />;
         });
 
         if (this.state.error) {
@@ -43,9 +45,9 @@ export class NFL extends Component {
         }
         else {
             return (
-                <ol>
+                <div className={"teamGrid"}>
                     {teamList}
-                </ol>
+                </div>
             );
             
         }
