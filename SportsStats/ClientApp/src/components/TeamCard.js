@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     },
     media: {
         height: 160,
-        width: '50%',
+        width: '45%',
         marginLeft: 'auto',
         marginRight: 'auto',
     },
